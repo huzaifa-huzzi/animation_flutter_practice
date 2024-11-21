@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             transform: Matrix4.translationValues(animation.value * width, 0.0, 0.0),
             child: Center(
               child: Container(
-                child: const Text('Login'),
+                child: const  Text('Login'),
               ),
             ),
           ),
