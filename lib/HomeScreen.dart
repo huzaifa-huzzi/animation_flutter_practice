@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    // Retrieve screen width
+
     final double width = MediaQuery.of(context).size.width;
 
     return AnimatedBuilder(
