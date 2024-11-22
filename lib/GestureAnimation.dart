@@ -18,7 +18,21 @@ class _GestureAnimationState extends State<GestureAnimation> {
         backgroundColor: Colors.green,
       ),
       body: Center(
-
+            child: InkWell(
+              onTap: (){
+                print('Clicked');
+              },
+              child: Container(
+                height: 70,
+                width: 100,
+                padding:const  EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  //
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child:const Center(child: Text('Click me')),
+              ),
+            ),
       ),
     );
   }
