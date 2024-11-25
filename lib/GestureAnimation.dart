@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class GestureAnimation extends StatefulWidget {
   const GestureAnimation({super.key});
 
