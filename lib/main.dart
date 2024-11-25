@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/DelayedAnimation.dart';
-import 'package:untitled/GestureAnimation.dart';
 
 void main() {
   runApp(const MyApp());
