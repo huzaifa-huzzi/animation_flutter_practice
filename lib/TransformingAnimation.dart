@@ -3,7 +3,6 @@
 
 import 'package:flutter/material.dart';
 
-
 class TransformingAnimation extends StatefulWidget {
   const TransformingAnimation({super.key});
 
@@ -11,9 +10,10 @@ class TransformingAnimation extends StatefulWidget {
   State<TransformingAnimation> createState() => _TransformingAnimationState();
 }
 
-class _TransformingAnimationState extends State<TransformingAnimation>  with SingleTickerProviderStateMixin{
-
-  late Animation<double> animation, transformingAnimation;
+class _TransformingAnimationState extends State<TransformingAnimation>
+    with SingleTickerProviderStateMixin {
+  late Animation<double> sizeAnimation;
+  late Animation<BorderRadius?> transformingAnimation; // Allow nullable type
   late AnimationController animationController;
 
   @override
@@ -26,54 +26,56 @@ class _TransformingAnimationState extends State<TransformingAnimation>  with Sin
       duration: const Duration(seconds: 10),
     );
 
-    // Define animations using CurvedAnimation for better transitions
-    animation = Tween<double>(begin: -0.1, end: 0.0).animate(
+    // Define size animation
+    sizeAnimation = Tween<double>(begin: 100, end: 200).animate(
       CurvedAnimation(
         parent: animationController,
         curve: Curves.easeIn,
       ),
     );
 
-    transformingAnimation = BorderRadiusTween(begin: BorderRadius.circular(125),end: BorderRadius.circular(0)).animate(CurvedAnimation(parent: animationController, curve: Curves.ease)) as Animation<double> ;
+    // Define transforming animation for border radius
+    transformingAnimation = BorderRadiusTween(
+      begin: BorderRadius.circular(125),
+      end: BorderRadius.circular(0),
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.ease,
+      ),
+    );
 
     // Start the animation
     animationController.forward();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder
-      (animation: AnimationController(vsync: this),
-        builder: (context,child){
+    return AnimatedBuilder(
+      animation: animationController,
+      builder: (context, child) {
         return Scaffold(
           body: Center(
             child: Stack(
               children: [
                 Center(
                   child: Container(
-                    alignment: Alignment.bottomCenter,
-                    width: animation.value,
-                    height: animation.value,
-                    decoration: BoxDecoration(
-                      borderRadius: transformingAnim.value,
-                      image: DecorationImage(
-                          image: AssetImage('assets/placeholder.jpg'))
-                    ),
+                    width: sizeAnimation.value, // Use size animation for width
+                    height: sizeAnimation.value,
+                    color: Colors.blue,// Use size animation for height
                   ),
-                )
+                ),
               ],
             ),
           ),
         );
-        });
+      },
+    );
   }
-}
 
-@override
-void dispose() {
-  animationController.dispose();
-  super.dispose();
-}
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
 }
