@@ -19,6 +19,9 @@ class _ValueChangeAnimationState extends State<ValueChangeAnimation> with Single
     animationController = AnimationController(vsync: this,duration: const Duration(seconds: 4));
 
     animation = Tween(begin: 10,end: 0).animate(CurvedAnimation(parent: animationController, curve: Curves.easeOut));
+
+    animationController.forward();
+
   }
 
   @override
