@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/AnimatingUi.dart';
-import 'package:untitled/MixingAnimations.dart';
+import 'package:untitled/CardAnimations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-    home: AnimationUi(),
+    home: CardAnimations(),
     );
   }
 }
