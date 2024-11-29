@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/AnimatingUi.dart';
 import 'package:untitled/MixingAnimations.dart';
-import 'package:untitled/ValueChangeAnimation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-    home: MixingAnimation(),
+    home: AnimationUi(),
     );
   }
 }
