@@ -8,118 +8,140 @@ class CardAnimations extends StatefulWidget {
 }
 
 class _CardAnimationsState extends State<CardAnimations> with SingleTickerProviderStateMixin {
+  late Animation<double> cardAnimation, delayedCardAnimation, fabButtonAnimation, infoButtonAnimation;
+  late AnimationController animationController;
 
- late Animation<double> cardAnimation,delayedCardANimation,fabButtonAnimation,infoButtonAnimation ;
- late AnimationController animationController ;
-
- @override
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    cardAnimation=Tween(begin: 0.0,end: -0.025).animate(CurvedAnimation(parent: animationController, curve: Curves.fastOutSlowIn));
-    delayedCardANimation = Tween(begin: 0.0,end: -0.05).animate(CurvedAnimation(parent: animationController, curve: Interval(0.5, 1.0,curve: Curves.fastOutSlowIn)));
-    fabButtonAnimation = Tween(begin: 0.0,end: -0.0008).animate(CurvedAnimation(parent: animationController, curve: Interval(0.8, 1.0,curve: Curves.fastOutSlowIn)));
-    infoButtonAnimation = Tween(begin: 0.0,end: 0.025).animate(CurvedAnimation(parent: animationController, curve: Interval(0.7, 1.0,curve: Curves.fastOutSlowIn)));
 
+    cardAnimation = Tween(begin: 0.0, end: -0.025).animate(
+      CurvedAnimation(parent: animationController, curve: Curves.fastOutSlowIn),
+    );
+
+    delayedCardAnimation = Tween(begin: 0.0, end: -0.05).animate(
+      CurvedAnimation(parent: animationController, curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn)),
+    );
+
+    fabButtonAnimation = Tween(begin: 0.0, end: -0.08).animate(
+      CurvedAnimation(parent: animationController, curve: const Interval(0.8, 1.0, curve: Curves.fastOutSlowIn)),
+    );
+
+    infoButtonAnimation = Tween(begin: 0.0, end: 0.025).animate(
+      CurvedAnimation(parent: animationController, curve: const Interval(0.7, 1.0, curve: Curves.fastOutSlowIn)),
+    );
+
+    animationController.forward(); // Start the animation
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     animationController.dispose();
+    super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
-   final double height = MediaQuery.of(context).size.height ;
-   animationController.forward();
+    final double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // First card
-            Positioned(
-              top: 40,
-              left: 20,
-              right: 20,
-              child: Container(
-                height: 400,
-                decoration: BoxDecoration(
-                  color: Colors.orange[200],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
-            // Second card
-            Positioned(
-              top: 20,
-              left: 40,
-              right: 40,
-              child: Container(
-                height: 400,
-                decoration: BoxDecoration(
-                  color: Colors.blue[200],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
-            // Third card
-            Positioned(
-              top: 0,
-              left: 60,
-              right: 60,
-              child: Container(
-                height: 400,
-                decoration: BoxDecoration(
-                  color: Colors.green[200],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
-            // Buttons at the bottom
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Cross button
-                    IconButton(
-                      icon: Icon(Icons.close, color: Colors.red, size: 30),
-                      onPressed: () {
-                        // Add cross button functionality here
-                      },
+      body: AnimatedBuilder(
+        animation: animationController,
+        builder: (context, child) {
+          return SafeArea(
+            child: Stack(
+              children: [
+                // First card
+                Positioned(
+                  top: height * 0.4 + (height * cardAnimation.value),
+                  left: 20,
+                  right: 20,
+                  child: Container(
+                    height: 400,
+                    decoration: BoxDecoration(
+                      color: Colors.orange[200],
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    // Comments button
-                    IconButton(
-                      icon: Icon(Icons.comment, color: Colors.grey, size: 30),
-                      onPressed: () {
-                        // Add comments button functionality here
-                      },
-                    ),
-                    // Heart button
-                    IconButton(
-                      icon: Icon(Icons.favorite, color: Colors.pink, size: 30),
-                      onPressed: () {
-                        // Add heart button functionality here
-                      },
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                // Second card
+                Positioned(
+                  top: height * 0.38 + (height * delayedCardAnimation.value),
+                  left: 40,
+                  right: 40,
+                  child: Container(
+                    height: 400,
+                    decoration: BoxDecoration(
+                      color: Colors.blue[200],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+                // Third card
+                Positioned(
+                  top: height * 0.36 + (height * delayedCardAnimation.value),
+                  left: 60,
+                  right: 60,
+                  child: Container(
+                    height: 400,
+                    decoration: BoxDecoration(
+                      color: Colors.green[200],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+                // Buttons at the bottom
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Cross button
+                        Transform.translate(
+                          offset: Offset(0, height * fabButtonAnimation.value),
+                          child: IconButton(
+                            icon: Icon(Icons.close, color: Colors.red, size: 30),
+                            onPressed: () {
+                              // Add cross button functionality here
+                            },
+                          ),
+                        ),
+                        // Comments button
+                        Transform.translate(
+                          offset: Offset(0, height * fabButtonAnimation.value),
+                          child: IconButton(
+                            icon: Icon(Icons.comment, color: Colors.grey, size: 30),
+                            onPressed: () {
+                              // Add comments button functionality here
+                            },
+                          ),
+                        ),
+                        // Heart button
+                        Transform.translate(
+                          offset: Offset(0, height * fabButtonAnimation.value),
+                          child: IconButton(
+                            icon: Icon(Icons.favorite, color: Colors.pink, size: 30),
+                            onPressed: () {
+                              // Add heart button functionality here
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
-  }
-
+}
