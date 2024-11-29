@@ -26,13 +26,69 @@ class _AnimationUiState extends State<AnimationUi> with SingleTickerProviderStat
    animation = Tween(begin: -1.0,end: 0.0).animate(CurvedAnimation(parent: animationController, curve: Curves.fastOutSlowIn));
    // delayedAnimation
    delayedAnimation = Tween(begin: -1.0,end: 0.0).animate(CurvedAnimation(parent: animationController, curve:Interval(0.5, 1.0,curve: Curves.fastOutSlowIn)));
-   //
+   // muchDelayedAnimation
+   muchDelayedAnimation = Tween(begin: -1.0,end: 0.0).animate(CurvedAnimation(parent: animationController, curve:Interval(0.8, 1.0,curve: Curves.fastOutSlowIn)));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+
+   final double width = MediaQuery.of(context).size.width;
+   animationController.forward();
+
     return AnimatedBuilder(
         animation: animation,
-        builder: builder)
+        builder: (context,child){
+          return Scaffold(
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                 Column(
+                  children: [
+                    Transform(
+                      transform: Matrix4.translationValues(animation.value * width, 0.0, 0.0),
+                      child: TextField(
+                          decoration: InputDecoration(
+                              hintText: 'Username',
+                              prefixIcon: Icon(Icons.add)
+                          )
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    Transform(
+                      transform: Matrix4.translationValues(delayedAnimation.value * width, 0.0, 0.0),
+                      child: TextField(
+                          decoration: InputDecoration(
+                              hintText: 'Username',
+                              prefixIcon: Icon(Icons.add)
+                          )
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20,),
+                Transform(
+                  transform: Matrix4.translationValues(muchDelayedAnimation.value* width, 0.0, 0.0),
+                  child: Container(
+                    height: 200,
+                    width: 300,
+                    color: Colors.red,
+                    child:const  Center(
+                      child: Text('Login'),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
   }
 }
