@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/CardAnimations.dart';
-import 'package:untitled/CarouselAnimation.dart';
-import 'package:untitled/FlipAnimation.dart';
-import 'package:untitled/RadialMenu.dart';
+import 'package:untitled/AnimatingToggle.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-    home:RadialMenu(),
+    home:AnimationToggle(),
     );
   }
 }

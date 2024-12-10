@@ -107,7 +107,7 @@ class _CardAnimationsState extends State<CardAnimations> with SingleTickerProvid
                         Transform.translate(
                           offset: Offset(0, height * fabButtonAnimation.value),
                           child: IconButton(
-                            icon: Icon(Icons.close, color: Colors.red, size: 30),
+                            icon: const Icon(Icons.close, color: Colors.red, size: 30),
                             onPressed: () {
                               // Add cross button functionality here
                             },
@@ -117,7 +117,7 @@ class _CardAnimationsState extends State<CardAnimations> with SingleTickerProvid
                         Transform.translate(
                           offset: Offset(0, height * fabButtonAnimation.value),
                           child: IconButton(
-                            icon: Icon(Icons.comment, color: Colors.grey, size: 30),
+                            icon: const Icon(Icons.comment, color: Colors.grey, size: 30),
                             onPressed: () {
                               // Add comments button functionality here
                             },
@@ -127,7 +127,7 @@ class _CardAnimationsState extends State<CardAnimations> with SingleTickerProvid
                         Transform.translate(
                           offset: Offset(0, height * fabButtonAnimation.value),
                           child: IconButton(
-                            icon: Icon(Icons.favorite, color: Colors.pink, size: 30),
+                            icon: const Icon(Icons.favorite, color: Colors.pink, size: 30),
                             onPressed: () {
                               // Add heart button functionality here
                             },

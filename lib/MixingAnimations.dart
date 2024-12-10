@@ -45,7 +45,7 @@ class _MixingAnimationState extends State<MixingAnimation> with SingleTickerProv
                 children: [
                   Center(
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       width: 350 ,
                       height: 200,
                       decoration: BoxDecoration(
@@ -55,8 +55,8 @@ class _MixingAnimationState extends State<MixingAnimation> with SingleTickerProv
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                           IconButton(onPressed: (){}, icon: Icon(Icons.add,color: Colors.red,)),
-                          IconButton(onPressed: (){}, icon: Icon(Icons.add,color: Colors.blue,)),
+                           IconButton(onPressed: (){}, icon: const Icon(Icons.add,color: Colors.red,)),
+                          IconButton(onPressed: (){}, icon: const Icon(Icons.add,color: Colors.blue,)),
                         ],
                       ),
                     ),

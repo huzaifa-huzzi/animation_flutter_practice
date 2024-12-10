@@ -25,9 +25,9 @@ class _AnimationUiState extends State<AnimationUi> with SingleTickerProviderStat
      // animation
    animation = Tween(begin: -1.0,end: 0.0).animate(CurvedAnimation(parent: animationController, curve: Curves.fastOutSlowIn));
    // delayedAnimation
-   delayedAnimation = Tween(begin: -1.0,end: 0.0).animate(CurvedAnimation(parent: animationController, curve:Interval(0.5, 1.0,curve: Curves.fastOutSlowIn)));
+   delayedAnimation = Tween(begin: -1.0,end: 0.0).animate(CurvedAnimation(parent: animationController, curve:const Interval(0.5, 1.0,curve: Curves.fastOutSlowIn)));
    // muchDelayedAnimation
-   muchDelayedAnimation = Tween(begin: -1.0,end: 0.0).animate(CurvedAnimation(parent: animationController, curve:Interval(0.8, 1.0,curve: Curves.fastOutSlowIn)));
+   muchDelayedAnimation = Tween(begin: -1.0,end: 0.0).animate(CurvedAnimation(parent: animationController, curve:const Interval(0.8, 1.0,curve: Curves.fastOutSlowIn)));
   }
 
   @override
@@ -55,17 +55,17 @@ class _AnimationUiState extends State<AnimationUi> with SingleTickerProviderStat
                   children: [
                     Transform(
                       transform: Matrix4.translationValues(animation.value * width, 0.0, 0.0),
-                      child: TextField(
+                      child: const TextField(
                           decoration: InputDecoration(
                               hintText: 'Username',
                               prefixIcon: Icon(Icons.add)
                           )
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
                     Transform(
                       transform: Matrix4.translationValues(delayedAnimation.value * width, 0.0, 0.0),
-                      child: TextField(
+                      child: const TextField(
                           decoration: InputDecoration(
                               hintText: 'Username',
                               prefixIcon: Icon(Icons.add)
@@ -74,7 +74,7 @@ class _AnimationUiState extends State<AnimationUi> with SingleTickerProviderStat
                     ),
                   ],
                 ),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 Transform(
                   transform: Matrix4.translationValues(muchDelayedAnimation.value* width, 0.0, 0.0),
                   child: Container(
